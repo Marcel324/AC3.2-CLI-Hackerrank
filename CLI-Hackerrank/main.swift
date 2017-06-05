@@ -119,6 +119,53 @@ func maximumElement() {
 }
 funk["maximumElement"] = maximumElement
 
+func equalStacks() {
+    let n = readLine()!
+    
+    var stackOne:(stack: [Int], height: Int) = (readLine()!.components(separatedBy: " ").map{ Int($0)! }.reversed(), 0)
+    var stackTwo:(stack: [Int], height: Int) = (readLine()!.components(separatedBy: " ").map{ Int($0)! }.reversed(), 0)
+    var stackThree:(stack: [Int], height: Int) = (readLine()!.components(separatedBy: " ").map{ Int($0)! }.reversed(), 0)
+    
+    stackOne.height = stackOne.stack.reduce(0, +)
+    stackTwo.height = stackTwo.stack.reduce(0, +)
+    stackThree.height = stackThree.stack.reduce(0, +)
+    
+    while !(stackOne.height == stackTwo.height && stackTwo.height == stackThree.height) {
+        if stackOne.height >= stackTwo.height && stackOne.height >= stackThree.height {
+            stackOne.height -= stackOne.stack.popLast()!
+            continue
+        }
+        
+        if stackTwo.height >= stackOne.height && stackTwo.height >= stackThree.height {
+            stackTwo.height -= stackTwo.stack.popLast()!
+            continue
+        }
+        
+        if stackThree.height >= stackOne.height && stackThree.height >= stackTwo.height {
+            stackThree.height -= stackThree.stack.popLast()!
+            continue
+        }
+    }
+    
+    print(stackOne.height)
+}
+funk["equalStacks"] = equalStacks
+
+func camelCase() {
+    let input = readLine()!
+    
+    var wordsInString = 1
+    
+    for character in input.characters {
+        if "\(character)" == "\(character)".uppercased() {
+            wordsInString += 1
+        }
+    }
+    
+    print(wordsInString)
+}
+funk["camelCase"] = camelCase
+
 while true {
     print("Enter a function, choices are: ", terminator: "")
     for k in funk.keys {
